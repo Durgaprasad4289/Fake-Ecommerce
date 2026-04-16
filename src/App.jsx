@@ -15,17 +15,23 @@ export default function App() {
   }, []);
   console.log(data);
   return (
-    <div className="App">
-      <h1>Welcome to the MaaCart !</h1>
-      {data && (
-        data.map((item)=>(
-          <div key={item.id}>
-            <h2>{item.title}</h2>
+  <div className="App">
+    <h1>Welcome to the MaaCart!</h1>
+    {!data ? (
+      <p className="loading">Loading products…</p>
+    ) : (
+      <div className="product-grid">           {/* ← add this wrapper */}
+        {data.map((item) => (
+          <div key={item.id} className="product-card">   {/* ← add class */}
             <img src={item.image} alt={item.title} />
-            <p>{item.description}</p>
+            <div className="card-body">        {/* ← wrap text in this */}
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+            </div>
           </div>
-        ))
-        )}
-    </div>
-  );
+        ))}
+      </div>
+    )}
+  </div>
+)
 }
